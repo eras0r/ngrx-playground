@@ -11,7 +11,7 @@ import {TodosState} from '../../todos.reducer';
 
 describe('TodosListEntryContainerComponent', () => {
 
-  const initialState: TodosState = {todos: [], editedTodo: null};
+  const initialState: TodosState = {todos: [], todoDetailsForm: null};
 
   let shallow: Shallow<TodoDetailsContainerComponent>;
 

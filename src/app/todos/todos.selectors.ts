@@ -10,7 +10,7 @@ export const selectTodos = createSelector(
   (state: TodosState) => state.todos
 );
 
-export const selectEditedTodo = createSelector(
+export const selectTodoDetailsForm = createSelector(
   selectTodosState,
-  (state: TodosState) => state.editedTodo
+  (state: TodosState) => state.todoDetailsForm
 );

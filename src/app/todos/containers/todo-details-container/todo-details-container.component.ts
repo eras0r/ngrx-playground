@@ -2,8 +2,10 @@ import {ChangeDetectionStrategy, Component, OnInit} from '@angular/core';
 import {select, Store} from '@ngrx/store';
 import {Todo} from '../../todos.model';
 import {saveTodo} from '../../todos.actions';
-import {selectEditedTodo} from '../../todos.selectors';
+import {selectTodoDetailsForm} from '../../todos.selectors';
 import {Observable} from 'rxjs';
+import {FormGroupState} from 'ngrx-forms';
+import {TodoDetailsFormState} from '../../todos.reducer';
 
 @Component({
   selector: 'app-todo-details-container',
@@ -13,13 +15,13 @@ import {Observable} from 'rxjs';
 })
 export class TodoDetailsContainerComponent implements OnInit {
 
-  editedTodo$: Observable<Todo>;
+  todoDetailsForm$: Observable<FormGroupState<TodoDetailsFormState>>;
 
   constructor(private store: Store<any>) {
   }
 
   ngOnInit() {
-    this.editedTodo$ = this.store.pipe(select(selectEditedTodo));
+    this.todoDetailsForm$ = this.store.pipe(select(selectTodoDetailsForm));
   }
 
   saveTodo(todo: Todo): void {

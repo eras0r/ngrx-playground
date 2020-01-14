@@ -8,7 +8,7 @@ import {TodosModule} from '../../todos.module';
 import {initNewTodo, removeCompletedTodos} from '../../todos.actions';
 
 describe('TodosContainerComponent', () => {
-  const initialState: TodosState = {todos: [], editedTodo: null};
+  const initialState: TodosState = {todos: [], todoDetailsForm: null};
 
   let shallow: Shallow<TodosContainerComponent>;
 

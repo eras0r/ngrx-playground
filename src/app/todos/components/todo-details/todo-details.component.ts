@@ -1,6 +1,7 @@
 import {ChangeDetectionStrategy, Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {Todo} from '../../todos.model';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
+import {FormGroupState} from 'ngrx-forms';
+import {TodoDetailsFormState} from '../../todos.reducer';
 
 @Component({
   selector: 'app-todo-details',
@@ -10,41 +11,24 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 })
 export class TodoDetailsComponent implements OnInit {
 
-  private _todo: Todo;
+  @Input()
+  formState: FormGroupState<TodoDetailsFormState>;
 
   @Output()
   saveTodo = new EventEmitter<Todo>();
 
-  todoFormGroup: FormGroup;
-
-  constructor(private fb: FormBuilder) {
+  constructor() {
   }
 
   ngOnInit() {
   }
 
   validateAndSaveTodo(): void {
-    if (this.todoFormGroup.valid) {
-      this.saveTodo.emit(this.todoFormGroup.value);
+    if (this.formState.isValid) {
+      this.saveTodo.emit(this.formState.value);
     } else {
       // TODO show warning
-      console.warn('Form is invalid');
-    }
-  }
-
-  get todo(): Todo {
-    return this._todo;
-  }
-
-  @Input()
-  set todo(value: Todo) {
-    this._todo = value;
-    if (value) {
-      this.todoFormGroup = this.fb.group({
-        id: [value.id],
-        name: [value.name, Validators.required],
-        completed: [value.completed]
-      });
+      console.warn('Form is invalid, errors: ', this.formState.errors);
     }
   }
 

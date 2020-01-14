@@ -6,7 +6,7 @@ describe('Todos Selectors', () => {
 
   const todoState: TodosState = {
     todos: [],
-    editedTodo: null
+    todoDetailsForm: null
   };
 
   it('should select the feature state', () => {

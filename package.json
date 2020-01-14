@@ -27,7 +27,8 @@
     "@ngrx/store": "8.6.0",
     "@ngrx/store-devtools": "8.6.0",
     "immer": "5.1.0",
-    "uuid": "^3.3.3"
+    "uuid": "^3.3.3",
+    "ngrx-forms": "^6.1.0"
   },
   "devDependencies": {
     "@angular-devkit/build-angular": "~0.803.20",

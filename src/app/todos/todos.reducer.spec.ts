@@ -1,6 +1,6 @@
 import {v4 as uuid} from 'uuid';
 import {Action} from '@ngrx/store';
-import {reducer, TodosState} from './todos.reducer';
+import {initTodoFormState, reducer, TodosState} from './todos.reducer';
 import * as TodosActions from './todos.actions';
 import {Todo} from './todos.model';
 
@@ -22,7 +22,7 @@ describe('Todos Reducer', () => {
         {id: '3', name: 'just finish it', completed: false},
         {id: '4', name: 'I am done', completed: true}
       ],
-      editedTodo: null
+      todoDetailsForm: initTodoFormState()
     };
 
     spyOn(uuid, 'v4').and.returnValue(testUuid);
@@ -57,13 +57,13 @@ describe('Todos Reducer', () => {
     });
 
     it('should set the editedTodo', () => {
-      expect(newState.editedTodo).toBeTruthy();
+      expect(newState.todoDetailsForm).toBeTruthy();
     });
 
     it('should properly init the editedTodo', () => {
-      expect(newState.editedTodo.id).toEqual(testUuid);
-      expect(newState.editedTodo.name).toEqual('');
-      expect(newState.editedTodo.completed).toEqual(false);
+      expect(newState.todoDetailsForm.value.id).toEqual(testUuid);
+      expect(newState.todoDetailsForm.value.name).toEqual('');
+      expect(newState.todoDetailsForm.value.completed).toEqual(false);
     });
 
   });
@@ -82,7 +82,7 @@ describe('Todos Reducer', () => {
     });
 
     it('should set the editedTodo', () => {
-      expect(newState.editedTodo).toEqual(editedTodo);
+      expect(newState.todoDetailsForm.value).toEqual(editedTodo);
     });
 
   });
