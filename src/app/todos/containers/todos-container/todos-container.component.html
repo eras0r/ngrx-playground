@@ -1,0 +1,9 @@
+<app-todo-details-container></app-todo-details-container>
+
+<app-todos-list [todos]="todos$ | async" (todoChanged)="changeTodo($event)"
+                (todoSelected)="setEditedTodo($event)">
+
+</app-todos-list>
+
+<button type="button" id="remove-completed" (click)="removeCompleted()">Remove completed</button>
+<button type="button" id="init-new" (click)="initNewTodo()">New Todo</button>

@@ -1,0 +1,20 @@
+<form #todoDetailsForm="ngForm" [formGroup]="todoFormGroup" *ngIf="todo">
+
+  <div class="row">
+    <div class="col-md-6 margin-bottom-2">
+      <h3>Todo details</h3>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-6 margin-bottom-2">
+
+      <input id="todo-id" type="text" formControlName="id" readonly>
+
+      <input id="todo-name" type="text" formControlName="name" placeholder="I want to...">
+
+      <button id="todo-add" type="submit" (click)="validateAndSaveTodo()">Save</button>
+    </div>
+  </div>
+
+</form>

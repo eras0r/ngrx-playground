@@ -1,0 +1,7 @@
+<div>
+  <input type="checkbox" id="todo-completed" [checked]="todo.completed" (change)="toggleTodo()">
+
+  <span id="todo-name" (click)="toggleEditing()">
+    {{todo.name}}
+  </span>
+</div>
