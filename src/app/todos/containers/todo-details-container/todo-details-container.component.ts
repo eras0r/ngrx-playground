@@ -5,7 +5,7 @@ import {saveTodo} from '../../todos.actions';
 import {selectTodoDetailsForm} from '../../todos.selectors';
 import {Observable} from 'rxjs';
 import {FormGroupState} from 'ngrx-forms';
-import {TodoDetailsFormState} from '../../todos.reducer';
+import {TodoDetailsFormState, TodosState} from '../../todos.reducer';
 
 @Component({
   selector: 'app-todo-details-container',
@@ -17,7 +17,7 @@ export class TodoDetailsContainerComponent implements OnInit {
 
   todoDetailsForm$: Observable<FormGroupState<TodoDetailsFormState>>;
 
-  constructor(private store: Store<any>) {
+  constructor(private store: Store<TodosState>) {
   }
 
   ngOnInit() {
