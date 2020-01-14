@@ -4,6 +4,7 @@ import {Todo} from '../../todos.model';
 import {saveTodo} from '../../todos.actions';
 import {selectEditedTodo} from '../../todos.selectors';
 import {Observable} from 'rxjs';
+import {TodosState} from '../../todos.reducer';
 
 @Component({
   selector: 'app-todo-details-container',
@@ -15,7 +16,7 @@ export class TodoDetailsContainerComponent implements OnInit {
 
   editedTodo$: Observable<Todo>;
 
-  constructor(private store: Store<any>) {
+  constructor(private store: Store<TodosState>) {
   }
 
   ngOnInit() {
