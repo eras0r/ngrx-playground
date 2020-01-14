@@ -6,8 +6,20 @@
     "ngrx-playground": {
       "projectType": "application",
       "schematics": {
-        "@schematics/angular:component": {
-          "style": "scss"
+        "@ngrx/schematics:component": {
+          "styleext": "scss",
+          "changeDetection": "OnPush"
+        },
+        "@ngrx/schematics:container": {
+          "styleext": "scss",
+          "changeDetection": "OnPush"
+        },
+        "@ngrx/schematics:feature": {
+          "creators": true,
+          "flat": false
+        },
+        "@ngrx/schematics:action": {
+          "creators": true
         }
       },
       "root": "",
@@ -126,5 +138,8 @@
       }
     }
   },
-  "defaultProject": "ngrx-playground"
+  "defaultProject": "ngrx-playground",
+  "cli": {
+    "defaultCollection": "@ngrx/schematics"
+  }
 }
