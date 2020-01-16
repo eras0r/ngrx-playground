@@ -1,5 +1,5 @@
 import {v4 as uuid} from 'uuid';
-import {createReducer} from '@ngrx/store';
+import {Action, createReducer} from '@ngrx/store';
 import {mutableOn} from '../core/mutable-on';
 import * as TodosActions from './todos.actions';
 import {Todo} from './todos.model';
@@ -76,14 +76,14 @@ export const validateTodoDetailsForm = updateGroup<TodoDetailsFormState>({
   name: validate(required, minLength(3))
 });
 
-
 // wrapReducerWithFormStateUpdate calls the update function
 // after the given reducer; you can wrap this reducer again
 // if you have multiple forms in your state
-export const reducer = wrapReducerWithFormStateUpdate(
-  todosReducer,
-  // point to the form state to update
-  s => s.todoDetailsForm,
-  // this function is always called after the reducer
-  validateTodoDetailsForm,
-);
+export function reducer(state = initialState, action: Action) {
+  return wrapReducerWithFormStateUpdate(
+    todosReducer,
+    s => s.todoDetailsForm,
+    validateTodoDetailsForm
+  )
+  (state, action);
+}
