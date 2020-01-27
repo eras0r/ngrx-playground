@@ -3,22 +3,20 @@ import {ComponentFixture} from '@angular/core/testing';
 import {Store} from '@ngrx/store';
 import {TodosListEntryContainerComponent} from './todos-list-entry-container.component';
 import {Shallow} from 'shallow-render';
-import {TodoDetailsContainerComponent} from '../todo-details-container/todo-details-container.component';
 import {TodosModule} from '../../todos.module';
 import {provideMockStore} from '@ngrx/store/testing';
-import {TodoDetailsComponent} from '../../components/todo-details/todo-details.component';
 import {TodosState} from '../../todos.reducer';
 
 describe('TodosListEntryContainerComponent', () => {
 
   const initialState: TodosState = {todos: [], editedTodo: null};
 
-  let shallow: Shallow<TodoDetailsContainerComponent>;
+  let shallow: Shallow<TodosListEntryContainerComponent>;
 
   beforeEach(() => {
-    shallow = new Shallow(TodoDetailsContainerComponent, TodosModule)
+    shallow = new Shallow(TodosListEntryContainerComponent, TodosModule)
       .provideMock(provideMockStore({
-        initialState
+        initialState: {todos: initialState}
       }));
   });
 
@@ -32,7 +30,7 @@ describe('TodosListEntryContainerComponent', () => {
     expect(todoListEntryElem).toBeDefined();
   });
 
-  function setupStoreMock(fixture: ComponentFixture<TodoDetailsComponent>) {
+  function setupStoreMock(fixture: ComponentFixture<TodosListEntryContainerComponent>) {
     const store = fixture.debugElement.injector.get<Store<TodosState>>(Store);
     spyOn(store, 'dispatch');
     return store;

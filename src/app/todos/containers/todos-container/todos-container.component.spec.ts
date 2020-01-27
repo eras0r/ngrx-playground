@@ -6,8 +6,10 @@ import {provideMockStore} from '@ngrx/store/testing';
 import {TodosState} from '../../todos.reducer';
 import {TodosModule} from '../../todos.module';
 import {initNewTodo, removeCompletedTodos} from '../../todos.actions';
+import {TodosListComponent} from '../../components/todos-list/todos-list.component';
 
-describe('TodosContainerComponent', () => {
+// TODO focus
+fdescribe('TodosContainerComponent', () => {
   const initialState: TodosState = {todos: [], editedTodo: null};
 
   let shallow: Shallow<TodosContainerComponent>;
@@ -15,7 +17,7 @@ describe('TodosContainerComponent', () => {
   beforeEach(() => {
     shallow = new Shallow(TodosContainerComponent, TodosModule)
       .provideMock(provideMockStore({
-        initialState
+        initialState: {todos: initialState}
       }));
   });
 
@@ -29,8 +31,10 @@ describe('TodosContainerComponent', () => {
   it('should contain a todo-list component', async () => {
     const {fixture, find} = await shallow.render();
     const todosListElem = find('app-todos-list');
+    const todosListComp = todosListElem.componentInstance as TodosListComponent;
 
     expect(todosListElem).toBeDefined();
+    expect(todosListComp.todos).toEqual(initialState.todos);
   });
 
   it('should dispatch the removeCompleted action when clicking on the remove completed button', async () => {

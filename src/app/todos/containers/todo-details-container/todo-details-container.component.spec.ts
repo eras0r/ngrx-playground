@@ -11,19 +11,28 @@ import {TodoDetailsComponent} from '../../components/todo-details/todo-details.c
 import {saveTodo} from '../../todos.actions';
 import {Todo} from '../../todos.model';
 
-describe('TodoDetailsContainerComponent', () => {
+// TODO focus
+fdescribe('TodoDetailsContainerComponent', () => {
 
-  const initialState: TodosState = {todos: [], editedTodo: null};
+  const initialState: TodosState = {todos: [], editedTodo: {id: '1', name: 'shred some trails', completed: false}};
 
   let shallow: Shallow<TodoDetailsContainerComponent>;
 
   beforeEach(() => {
     shallow = new Shallow(TodoDetailsContainerComponent, TodosModule)
       .provideMock(provideMockStore({
-        initialState
+        initialState: {todos: initialState}
       }));
   });
 
+  it('should contain a app-todo-details component', async () => {
+    const {fixture, find} = await shallow.render();
+    const todosListElem = find('app-todo-details');
+    const todoDetailsComp = todosListElem.componentInstance as TodoDetailsComponent;
+
+    expect(todosListElem).toBeDefined();
+    expect(todoDetailsComp.todo).toEqual(initialState.editedTodo);
+  });
 
   it('should dispatch the saveTodo action with the given todo', async () => {
     const {instance, fixture, find} = await shallow.render();
