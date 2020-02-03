@@ -1,20 +1,28 @@
 import * as fromTodos from './todos.reducer';
 import {TodosState} from './todos.reducer';
-import {selectTodosState} from './todos.selectors';
+import {selectTodoDetailsForm, selectTodos, selectTodosState} from './todos.selectors';
 
 describe('Todos Selectors', () => {
 
-  const todoState: TodosState = {
+  const todosState: TodosState = {
     todos: [],
     todoDetailsForm: null
   };
 
   it('should select the feature state', () => {
     const result = selectTodosState({
-      [fromTodos.todosFeatureKey]: todoState
+      [fromTodos.todosFeatureKey]: todosState
     });
 
-    expect(result).toEqual(todoState);
+    expect(result).toEqual(todosState);
+  });
+
+  it('select the todos', () => {
+    expect(selectTodos.projector(todosState)).toEqual(todosState.todos);
+  });
+
+  it('select the todoDetailsForm', () => {
+    expect(selectTodoDetailsForm.projector(todosState)).toEqual(todosState.todoDetailsForm);
   });
 
 });
